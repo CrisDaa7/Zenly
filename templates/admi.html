@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido Administrador{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <img src="{{ url_for('static', filename='zenly.png') }}" alt="Distintivo" class="img-fluid" style="width: 100px; height: auto;">
+    <div class="admin-info">
+        <span class="status-dot"></span> <!-- Punto verde de estado -->
+        <h1 class="admin-title">Bienvenido, {{ nombre }} (Administrador)</h1>
+        
+    </div>
+</div>
+
+<div id="mi-perfil" class="mt-5">
+    <h2>Mi Perfil</h2>
+    <p><strong>Nombre:</strong> {{ nombre }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <p>
+        <strong>Contraseña:</strong>
+        <span id="passwordDisplay">*********</span>
+        <i id="togglePassword" class="fas fa-eye" style="cursor: pointer; margin-left: 10px;"></i>
+    </p>
+    <a href="/editar_perfil" class="btn btn-primary">Editar Perfil</a>
+</div>
+
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordDisplay = document.getElementById('passwordDisplay');
+    const actualPassword = "{{ password }}"; // La contraseña del usuario desde la base de datos
+
+    togglePassword.addEventListener('click', function() {
+        if (passwordDisplay.innerText === '*********') {
+            passwordDisplay.innerText = actualPassword; // Muestra la contraseña
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+        } else {
+            passwordDisplay.innerText = '*********'; // Oculta la contraseña
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+        }
+    });
+</script>
+
+<style>
+    /* Asegura que el título del administrador sea visible en ambos temas */
+    .admin-title {
+        color: #343a40; /* Color del texto en modo claro */
+        font-weight: bold; /* Hacer el texto más prominente */
+    }
+
+    body.dark-theme .admin-title {
+        color: #f8f9fa; /* Color del texto en modo oscuro */
+    }
+
+    /* Estilo para el menú */
+    #mi-perfil {
+        color: #343a40; /* Color del texto en modo claro */
+    }
+
+    body.dark-theme #mi-perfil {
+        color: #f8f9fa; /* Color del texto en modo oscuro */
+    }
+
+    /* Alineación de la imagen */
+    img {
+        margin-right: 10px; /* Espacio entre la imagen y el texto */
+    }
+    span{
+        margin-right: 10px; /* Espacio entre la imagen y el texto */
+    }
+
+</style>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "baseUsuario.html" %}
+
+{% block title %}Juegos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <img src="{{ url_for('static', filename='zenly.png') }}" alt="Distintivo" class="img-fluid" style="width: 100px; height: auto;">
+    <div class="usuario-info">        
+    </div>
+</div>
+<div class="container mt-5">
+    <h1 class="text-center">Juegos</h1>
+    
+    <div id="gamesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center">
+                    <div class="game-card">
+                        <div class="card">
+                            <img src="{{ url_for('static', filename='test1.jpeg') }}" class="card-img-top" alt="Ajedrez">
+                            <div class="card-body">
+                                <h5 class="card-title">Test 1</h5>
+                                <p class="card-text">Descubre tu nivel de estres.</p>
+                                <a href="#" class="btn btn-primary">ir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center">
+                    <div class="game-card">
+                        <div class="card">
+                            <img src="{{ url_for('static', filename='billar.png') }}" class="card-img-top" alt="Billar">
+                            <div class="card-body">
+                                <h5 class="card-title">Test 2</h5>
+                                <p class="card-text">Juega con tus amigos y muestra tus habilidades.</p>
+                                <a href="#" class="btn btn-primary">ir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center">
+                    <div class="game-card">
+                        <div class="card">
+                            <img src="{{ url_for('static', filename='otro_juego.jpg') }}" class="card-img-top" alt="Otro Juego">
+                            <div class="card-body">
+                                <h5 class="card-title">Test 3</h5>
+                                <p class="card-text">Explora nuevas aventuras y desafíos.</p>
+                                <a href="#" class="btn btn-primary">ir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#gamesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#gamesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+</div>
+
+<style>
+    .game-card {
+        margin: 20px; /* Espacio entre tarjetas */
+        perspective: 1000px; /* Perspectiva para el efecto 3D */
+    }
+
+    .card {
+        width: 300px; /* Tamaño de la tarjeta */
+        border-radius: 15px; /* Esquinas redondeadas */
+        overflow: hidden; /* Esconde el desbordamiento */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+        transition: transform 0.6s; /* Transición suave */
+    }
+
+    .card:hover {
+        transform: rotateY(360deg); /* Rotación completa al pasar el mouse */
+    }
+
+    .card-img-top {
+        border-bottom: 2px solid #007bff; /* Línea de separación */
+    }
+
+    .card-body {
+        background-color: #fff; /* Fondo blanco para el cuerpo de la tarjeta */
+        text-align: center; /* Alineación centrada del texto */
+    }
+
+    .card-title {
+        font-size: 1.5rem; /* Tamaño de fuente del título */
+        font-weight: bold; /* Negrita */
+        margin: 10px 0; /* Margen alrededor del título */
+    }
+
+    .card-text {
+        font-size: 1rem; /* Tamaño de fuente del texto */
+        margin: 10px 0; /* Margen alrededor del texto */
+    }
+
+    .btn {
+        border-radius: 25px; /* Esquinas redondeadas en el botón */
+        padding: 10px 20px; /* Espaciado interno del botón */
+        font-size: 1rem; /* Tamaño de fuente del botón */
+    }
+</style>
+{% endblock %}

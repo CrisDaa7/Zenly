@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Estrés</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .test-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .test-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .test-container input {
+            margin-right: 10px;
+        }
+
+        .result-container {
+            display: none;
+            width: 60%;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        .description {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test para Medir el Estrés</h1>
+
+    <div class="test-container">
+        <form id="stressForm">
+            <label>1. En el último mes, ¿con qué frecuencia has sentido que las dificultades se acumulan tanto que no puedes superarlas?</label>
+            <input type="radio" name="question1" value="1"> Nunca
+            <input type="radio" name="question1" value="2"> Casi nunca
+            <input type="radio" name="question1" value="3"> De vez en cuando
+            <input type="radio" name="question1" value="4"> A menudo
+            <input type="radio" name="question1" value="5"> Muy a menudo
+
+            <label>2. ¿Con qué frecuencia te has sentido incapaz de controlar cosas importantes en tu vida?</label>
+            <input type="radio" name="question2" value="1"> Nunca
+            <input type="radio" name="question2" value="2"> Casi nunca
+            <input type="radio" name="question2" value="3"> De vez en cuando
+            <input type="radio" name="question2" value="4"> A menudo
+            <input type="radio" name="question2" value="5"> Muy a menudo
+
+            <label>3. ¿Con qué frecuencia te has sentido nervioso o estresado?</label>
+            <input type="radio" name="question3" value="1"> Nunca
+            <input type="radio" name="question3" value="2"> Casi nunca
+            <input type="radio" name="question3" value="3"> De vez en cuando
+            <input type="radio" name="question3" value="4"> A menudo
+            <input type="radio" name="question3" value="5"> Muy a menudo
+
+            <label>4. ¿Con qué frecuencia te has sentido confiado en tu capacidad para manejar problemas personales?</label>
+            <input type="radio" name="question4" value="5"> Nunca
+            <input type="radio" name="question4" value="4"> Casi nunca
+            <input type="radio" name="question4" value="3"> De vez en cuando
+            <input type="radio" name="question4" value="2"> A menudo
+            <input type="radio" name="question4" value="1"> Muy a menudo
+
+            <label>5. ¿Con qué frecuencia te has sentido que las cosas te van bien?</label>
+            <input type="radio" name="question5" value="5"> Nunca
+            <input type="radio" name="question5" value="4"> Casi nunca
+            <input type="radio" name="question5" value="3"> De vez en cuando
+            <input type="radio" name="question5" value="2"> A menudo
+            <input type="radio" name="question5" value="1"> Muy a menudo
+
+            <label>6. ¿Con qué frecuencia has sentido que no podías lidiar con todo lo que tenías que hacer?</label>
+            <input type="radio" name="question6" value="1"> Nunca
+            <input type="radio" name="question6" value="2"> Casi nunca
+            <input type="radio" name="question6" value="3"> De vez en cuando
+            <input type="radio" name="question6" value="4"> A menudo
+            <input type="radio" name="question6" value="5"> Muy a menudo
+
+            <label>7. ¿Con qué frecuencia has podido controlar las dificultades de tu vida?</label>
+            <input type="radio" name="question7" value="5"> Nunca
+            <input type="radio" name="question7" value="4"> Casi nunca
+            <input type="radio" name="question7" value="3"> De vez en cuando
+            <input type="radio" name="question7" value="2"> A menudo
+            <input type="radio" name="question7" value="1"> Muy a menudo
+
+            <label>8. ¿Con qué frecuencia has sentido que tenías todo bajo control?</label>
+            <input type="radio" name="question8" value="5"> Nunca
+            <input type="radio" name="question8" value="4"> Casi nunca
+            <input type="radio" name="question8" value="3"> De vez en cuando
+            <input type="radio" name="question8" value="2"> A menudo
+            <input type="radio" name="question8" value="1"> Muy a menudo
+
+            <label>9. ¿Con qué frecuencia has sentido que podías controlar la irritación en tu vida?</label>
+            <input type="radio" name="question9" value="5"> Nunca
+            <input type="radio" name="question9" value="4"> Casi nunca
+            <input type="radio" name="question9" value="3"> De vez en cuando
+            <input type="radio" name="question9" value="2"> A menudo
+            <input type="radio" name="question9" value="1"> Muy a menudo
+
+            <label>10. ¿Con qué frecuencia has sentido que las dificultades se te acumulaban?</label>
+            <input type="radio" name="question10" value="1"> Nunca
+            <input type="radio" name="question10" value="2"> Casi nunca
+            <input type="radio" name="question10" value="3"> De vez en cuando
+            <input type="radio" name="question10" value="4"> A menudo
+            <input type="radio" name="question10" value="5"> Muy a menudo
+
+            <button type="button" class="btn" onclick="showResults('pie')">Mostrar en Gráfico de Pastel</button>
+        </form>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <canvas id="stressChart"></canvas>
+        <div class="description" id="description"></div>
+    </div>
+
+    <script>
+        function showResults(chartType) {
+            const form = document.getElementById('stressForm');
+            const formData = new FormData(form);
+            let stressLevel = 0;
+
+            // Calcular el puntaje total basado en las respuestas
+            for (let [key, value] of formData.entries()) {
+                stressLevel += parseInt(value);
+            }
+
+            // Mostrar la descripción según el puntaje
+            const descriptionElement = document.getElementById('description');
+            let description = '';
+            if (stressLevel <= 22) {
+                description = 'Puntuación entre 10 y 22 puntos – nivel de estrés bajo.';
+            } else if (stressLevel <= 31) {
+                description = 'Puntuación entre 23 y 31 puntos – nivel de estrés medio: ha habido situaciones estresantes que has podido manejar más o menos, ¡pero no te despistes!';
+            } else {
+                description = 'Puntuación entre 32 y 50 puntos – nivel de estrés alto: es importante que busques maneras de relajarte y lidiar con el estrés.';
+            }
+            descriptionElement.innerHTML = description;
+
+            // Mostrar el gráfico
+            const ctx = document.getElementById('stressChart').getContext('2d');
+            const data = {
+                labels: ['Nivel de Estrés'],
+                datasets: [{
+                    label: 'Puntaje de Estrés',
+                    data: [stressLevel, 50 - stressLevel],
+                    backgroundColor: ['#ff6384', '#36a2eb']
+                }]
+            };
+
+            const config = {
+                type: chartType,
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+
+            // Mostrar el contenedor de resultados
+            document.getElementById('resultContainer').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
+
+
